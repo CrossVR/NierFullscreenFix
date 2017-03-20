@@ -29,7 +29,7 @@ HMODULE GetDXGIModule()
 
 	wchar_t path[MAX_PATH];
 	GetWindowsDirectory(path, MAX_PATH);
-	wcsncat(path, L"\\System32\\dxgi.dll", MAX_PATH);
+	wcsncat_s(path, L"\\System32\\dxgi.dll", MAX_PATH);
 	module = LoadLibrary(path);
 	return module;
 }
