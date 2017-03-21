@@ -59,6 +59,8 @@ extern "C" __declspec(dllexport) HRESULT WINAPI CreateDXGIFactory1(REFIID riid, 
 	static _CreateDXGIFactory func = NULL;
 	if (!func)
 		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory1");
+	if (!func)
+		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory");
 
 	return func(riid, ppFactory);
 }
@@ -68,6 +70,10 @@ extern "C" __declspec(dllexport) HRESULT WINAPI CreateDXGIFactory2(REFIID riid, 
 	static _CreateDXGIFactory func = NULL;
 	if (!func)
 		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory2");
+	if (!func)
+		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory1");
+	if (!func)
+		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory");
 
 	return func(riid, ppFactory);
 }
