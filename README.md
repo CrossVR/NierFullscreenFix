@@ -2,9 +2,9 @@
 
 Fixes NieR: Automata appearing stretched even when the native resolution is selected. Special thanks to Kaldaien for coming up with the original fix.
 
-[Download the latest version](https://github.com/Armada651/NierFullscreenFix/releases/download/v1.0/dxgi.dll)
+[Download the latest version](https://github.com/Armada651/NierFullscreenFix/releases/v1.1)
 
-Put [`dxgi.dll`](https://github.com/Armada651/NierFullscreenFix/releases/download/v1.0/dxgi.dll) into your `NieRAutomata` folder next to `NieRAutomata.exe`, by default this folder should be located here: `C:\Program Files (x86)\Steam\steamapps\common\NieRAutomata`.
+Put [`dxgi.dll`](https://github.com/Armada651/NierFullscreenFix/releases/download/v1.1/dxgi.dll) into your `NieRAutomata` folder next to `NieRAutomata.exe`, by default this folder should be located here: `C:\Program Files (x86)\Steam\steamapps\common\NieRAutomata`.
 
 # Licenses
 
