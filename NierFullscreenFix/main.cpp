@@ -49,7 +49,7 @@ HRESULT WINAPI CreateDXGIFactory(REFIID riid, _Out_ void **ppFactory)
 	HRESULT hr = func(riid, ppFactory);
 
 	if (SUCCEEDED(hr))
-		CreateSwapChain_Original = (_CreateSwapChain)vtablehook_hook(*ppFactory, CreateSwapChain_Hook, 10);
+		CreateSwapChain_Original = (_CreateSwapChain)vtablehook(*ppFactory, CreateSwapChain_Hook, 10);
 
 	return hr;
 }
@@ -68,6 +68,8 @@ HRESULT WINAPI CreateDXGIFactory1(REFIID riid, _Out_ void **ppFactory)
 HRESULT WINAPI CreateDXGIFactory2(REFIID riid, _Out_ void **ppFactory)
 {
 	static _CreateDXGIFactory func = NULL;
+	if (!func)
+		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory2");
 	if (!func)
 		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory1");
 	if (!func)
