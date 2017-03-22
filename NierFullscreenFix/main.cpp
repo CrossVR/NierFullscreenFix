@@ -40,7 +40,7 @@ HRESULT STDMETHODCALLTYPE CreateSwapChain_Hook(void *that, IUnknown *pDevice, DX
 	return CreateSwapChain_Original(that, pDevice, pDesc, ppSwapChain);
 }
 
-extern "C" __declspec(dllexport) HRESULT WINAPI CreateDXGIFactory(REFIID riid, _Out_ void **ppFactory)
+HRESULT WINAPI CreateDXGIFactory(REFIID riid, _Out_ void **ppFactory)
 {
 	static _CreateDXGIFactory func = NULL;
 	if (!func)
@@ -54,7 +54,7 @@ extern "C" __declspec(dllexport) HRESULT WINAPI CreateDXGIFactory(REFIID riid, _
 	return hr;
 }
 
-extern "C" __declspec(dllexport) HRESULT WINAPI CreateDXGIFactory1(REFIID riid, _Out_ void **ppFactory)
+HRESULT WINAPI CreateDXGIFactory1(REFIID riid, _Out_ void **ppFactory)
 {
 	static _CreateDXGIFactory func = NULL;
 	if (!func)
@@ -65,11 +65,9 @@ extern "C" __declspec(dllexport) HRESULT WINAPI CreateDXGIFactory1(REFIID riid, 
 	return func(riid, ppFactory);
 }
 
-extern "C" __declspec(dllexport) HRESULT WINAPI CreateDXGIFactory2(REFIID riid, _Out_ void **ppFactory)
+HRESULT WINAPI CreateDXGIFactory2(REFIID riid, _Out_ void **ppFactory)
 {
 	static _CreateDXGIFactory func = NULL;
-	if (!func)
-		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory2");
 	if (!func)
 		func = (_CreateDXGIFactory)GetProcAddress(GetDXGIModule(), "CreateDXGIFactory1");
 	if (!func)
