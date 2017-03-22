@@ -1,5 +1,5 @@
 #include <Windows.h>
-#include "vtablehook.h"
+#include "MinHook.h"
 #include "dxgitype.h"
 
 typedef UINT DXGI_USAGE;
@@ -48,8 +48,12 @@ HRESULT WINAPI CreateDXGIFactory(REFIID riid, _Out_ void **ppFactory)
 
 	HRESULT hr = func(riid, ppFactory);
 
-	if (SUCCEEDED(hr))
-		CreateSwapChain_Original = (_CreateSwapChain)vtablehook(*ppFactory, CreateSwapChain_Hook, 10);
+    if (SUCCEEDED(hr))
+    {
+        MH_Initialize();
+        MH_CreateHookVirtual(*ppFactory, 10, CreateSwapChain_Hook, (void**)&CreateSwapChain_Original);
+        MH_EnableHook(MH_ALL_HOOKS);
+    }
 
 	return hr;
 }
